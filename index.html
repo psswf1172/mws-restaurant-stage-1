@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+    <!-- <link rel="stylesheet" media="screen and (max-width: 400px)" href="css/under400styles.css">
+    <link rel="stylesheet" media="screen and (min-width: 401px)" href="css/under700styles.css">
+    <link rel="stylesheet" media="screen and (min-width: 900px)" href="css/over900styles.css"> -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
     <title>Restaurant Reviews</title>
@@ -17,12 +20,13 @@
     </header>
 
     <main id="maincontent">
-      <section id="map-container">
+      <section>
         <div id="map"></div>
       </section>
+
       <section>
-        <div class="filter-options">
-          <h2>Filter Results</h2>
+        <div class="filter-options container">
+          <div><h2>Filter Results</h2></div>
           <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
             <option value="all">All Neighborhoods</option>
           </select>
@@ -30,7 +34,9 @@
             <option value="all">All Cuisines</option>
           </select>
         </div>
-        <ul id="restaurants-list"></ul>
+        <div class="container">
+          <ul id="restaurants-list"></ul>
+        </div>
       </section>
     </main>
 
