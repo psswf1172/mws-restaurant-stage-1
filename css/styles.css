@@ -270,18 +270,20 @@ nav h1 a {
 #reviews-list {
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: outside none none;
 }
 
 #reviews-list li {
   background-color: #fff;
   border: 2px solid #f3f3f3;
   border-radius: 25px 0px;
-  display: block;
-  list-style-type: none;
-  margin: 0px 0px 30px;
+  display: inline;
+  margin: 15px;
   overflow: hidden;
-  position: relative;
-  width: 85%;
+  text-align: left;
+  width: 270px;
 }
 
 #reviews-list li h5 {
