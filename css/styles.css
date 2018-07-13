@@ -320,6 +320,7 @@ nav h1 a {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   list-style: outside none none;
 }
 
@@ -332,7 +333,24 @@ nav h1 a {
   overflow: hidden;
   text-align: left;
   min-width: 270px;
-  max-width: 300px;
+}
+
+@media only screen and (max-width: 555) {
+  #reviews-list li {
+    max-width: 100%
+  }
+}
+
+@media only screen and (max-width: 830) {
+  #reviews-list li {
+    max-width: 40%
+  }
+}
+
+@media only screen and (min-width: 831) {
+  #reviews-list li {
+    max-width: 270px;
+  }
 }
 
 #reviews-list li h5 {
