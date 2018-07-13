@@ -152,6 +152,7 @@ nav h1 a {
   align-items: center;
   display: flex;
   padding: 10px;
+  flex-wrap: wrap;
 }
 
 .filter-options h2 {
@@ -183,6 +184,7 @@ nav h1 a {
   text-align: center;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 #restaurants-list li {
@@ -195,6 +197,24 @@ nav h1 a {
   text-align: left;
   width: 270px;
   display: inline;
+}
+
+@media only screen and (max-width: 555) {
+  #restaurants-list li {
+    max-width: 100%
+  }
+}
+
+@media only screen and (max-width: 830) {
+  #restaurants-list li {
+    max-width: 40%
+  }
+}
+
+@media only screen and (min-width: 831) {
+  #restaurants-list li {
+    max-width: 270px;
+  }
 }
 
 #restaurants-list .restaurant-img {
