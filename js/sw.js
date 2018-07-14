@@ -24,15 +24,8 @@ self.addEventListener('install', (event) => {
 
 // serve from cache if it is there
 self.addEventListener('fetch', (event) => {
-  let req = event.request;
-  let cacheReqUrl = new URL(event.request.url);
-  if (event.request.url.includes('restaurant.html')) {
-    const cacheUrl = 'restaurant.html';
-    req = new Request(cacheUrl);
-  }
-
   event.respondWith(
-    caches.match(req).then(response => {
+    caches.match(event.request).then(response => {
       return response || fetch(event.request)
         .then(fetchedRes => {
           return caches.open(cacheId).then(cache => {
