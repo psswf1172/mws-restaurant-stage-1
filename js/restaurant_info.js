@@ -1,5 +1,5 @@
 let restaurant;
-var newMap;
+let newMap;
 
 /**
  * Initialize map as soon as the page is loaded.
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
  */
 initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
-    if (error) { // Got an error!
+    if (error) {
       console.error(error);
     } else {
       self.newMap = L.map('map', {
@@ -33,18 +33,18 @@ initMap = () => {
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
     }
   });
-}
+};
 
 /**
  * Get current restaurant from page URL.
  */
 fetchRestaurantFromURL = (callback) => {
-  if (self.restaurant) { // restaurant already fetched!
+  if (self.restaurant) {
     callback(null, self.restaurant)
     return;
   }
   const id = getParameterByName('id');
-  if (!id) { // no id found in URL
+  if (!id) {
     error = 'No restaurant id in URL'
     callback(error, null);
   } else {
@@ -58,7 +58,7 @@ fetchRestaurantFromURL = (callback) => {
       callback(null, restaurant)
     });
   }
-}
+};
 
 /**
  * Create restaurant HTML and add it to the webpage
@@ -69,14 +69,16 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
+  address.setAttribute('tabindex', 0);
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
-  image.setAttribute('alt', 'Image of ${restaurant.name}')
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.setAttribute('alt', 'Image of '+ restaurant.name);
+  image.setAttribute('tabindex', 0);
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
+  cuisine.setAttribute('tabindex', 0);
 
   // fill operating hours
   if (restaurant.operating_hours) {
@@ -84,33 +86,33 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   }
   // fill reviews
   fillReviewsHTML();
-}
+};
 
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
-  for (let key in operatingHours) {
+  hours.setAttribute('tabindex', 0);
+  operatingHours.forEach(openHrs => {
     const row = document.createElement('tr');
-
     const day = document.createElement('td');
-    day.innerHTML = key.slice(0, 3);
+    day.innerHTML = openHrs.slice(0, 3);
     row.appendChild(day);
 
     const time = document.createElement('td');
-    time.innerHTML = operatingHours[key];
+    time.innerHTML = operatingHours[openHrs];
     row.appendChild(time);
-
     hours.appendChild(row);
-  }
-}
+  });
+};
 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
+  container.setAttribute('tabindex', 0);
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
   container.appendChild(title);
@@ -126,7 +128,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     ul.appendChild(createReviewHTML(review));
   });
   container.appendChild(ul);
-}
+};
 
 /**
  * Create review HTML and add it to the webpage.
@@ -138,7 +140,7 @@ createReviewHTML = (review) => {
   li.appendChild(name);
 
   const date = document.createElement('span');
-  date.className = "review-date"
+  date.className = 'review-date';
   date.innerHTML = review.date;
   name.insertAdjacentElement('beforeend', date);
 
@@ -151,7 +153,7 @@ createReviewHTML = (review) => {
   li.appendChild(comments);
 
   return li;
-}
+};
 
 /**
  * Add restaurant name to the breadcrumb navigation menu
@@ -161,7 +163,7 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
   const li = document.createElement('li');
   li.innerHTML = restaurant.name;
   breadcrumb.appendChild(li);
-}
+};
 
 /**
  * Get a parameter by name from page URL.
@@ -177,4 +179,4 @@ getParameterByName = (name, url) => {
   if (!results[2])
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+};
