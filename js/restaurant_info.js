@@ -1,5 +1,4 @@
 let restaurant;
-let newMap;
 
 /**
  * Initialize map as soon as the page is loaded.
@@ -16,7 +15,7 @@ initMap = () => {
     if (error) {
       console.error(error);
     } else {
-      self.newMap = L.map('map', {
+      const NEWMAP = self.newMap = L.map('map', {
         center: [restaurant.latlng.lat, restaurant.latlng.lng],
         zoom: 16,
         scrollWheelZoom: false
@@ -93,18 +92,19 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
-  hours.setAttribute('tabindex', 0);
-  operatingHours.forEach(openHrs => {
+  for (let key in operatingHours) {
     const row = document.createElement('tr');
+
     const day = document.createElement('td');
-    day.innerHTML = openHrs.slice(0, 3);
+    day.innerHTML = key;
     row.appendChild(day);
 
     const time = document.createElement('td');
-    time.innerHTML = operatingHours[openHrs];
+    time.innerHTML = operatingHours[key];
     row.appendChild(time);
+
     hours.appendChild(row);
-  });
+  }
 };
 
 /**
