@@ -1,7 +1,7 @@
 let cacheId = 'mws-rest-1';
 
 // load the cache
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(cacheId).then(cache => {
       return cache.addAll([
@@ -23,13 +23,20 @@ self.addEventListener('install', (event) => {
 });
 
 // serve from cache if it is there
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
+  let req = event.request;
+  let cacheRegUrl = new URL(event.request.url);
+  if (event.request.url.includes('restaurant.html')) {
+    const cacheUrl = 'restaurant.html';
+    req = new Request(cacheUrl);
+  }
+
   event.respondWith(
-    caches.match(event.request).then(response => {
+    caches.match(req).then(response => {
+      console.log('serving you from the cache!')
       return response || fetch(event.request)
         .then(fetchedRes => {
           return caches.open(cacheId).then(cache => {
-            console.log('hit the cache');
             cache.put(event.request, fetchedRes.clone());
             return fetchedRes;
           });

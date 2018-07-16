@@ -12,15 +12,17 @@
 
   <body>
     <header>
-      <nav>
         <h1>
           <a href="/">Restaurant Reviews</a>
         </h1>
-      </nav>
-      <ul id="breadcrumb" >
-        <li><a href="/">Home</a></li>
-      </ul>
     </header>
+
+    <nav>
+      <!-- Changed ul to ol so aria-current is semantically understood. https://stackoverflow.com/questions/25326699/proper-aria-handling-of-breadcrumb-navigation -->
+      <ol id="breadcrumb" aria-label="Breadcrumb">
+        <li><a href="/">Home</a></li>
+      </ol>
+    </nav>
 
     <main id="maincontent">
 
@@ -28,7 +30,7 @@
         <h2 id="restaurant-name"></h2>
         <img id="restaurant-img">
         <section class="map-container">
-          <div id="map" class="restaurant-map"></div>
+          <div id="map" class="restaurant-map" aria-label="Restaurant Location on Map" role="application"></div>
         </section>
         <p id="restaurant-cuisine"></p>
         <p id="restaurant-address"></p>
