@@ -257,7 +257,7 @@ nav {
 }
 
 #restaurant-img {
-  width: 100%;
+  width: 80%;
   border-radius: 15px 0 0 0;
 }
 
@@ -299,6 +299,7 @@ nav {
   border-bottom: 1px solid var(--ltgray);
   border-top: 1px solid var(--white);
   padding: 20px;
+  text-align: center;
 }
 
 #reviews-container h2 {
